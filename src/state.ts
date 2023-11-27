@@ -3,7 +3,18 @@
 import { reactive } from 'vue'
 import { Logger } from 'zeed'
 import { trackException, trackSilentException } from './bugs'
-import { MUTE_AUDIO, MUTE_VIDEO, ROOM_PATH, SHOW_CHAT, SHOW_FULLSCREEN, SHOW_INVITATION, SHOW_INVITATION_HINT, SHOW_SETTINGS, SHOW_SHARE } from './config'
+import {
+  MUTE_AUDIO,
+  MUTE_SCREEN,
+  MUTE_VIDEO,
+  ROOM_PATH,
+  SHOW_CHAT,
+  SHOW_FULLSCREEN,
+  SHOW_INVITATION,
+  SHOW_INVITATION_HINT,
+  SHOW_SETTINGS,
+  SHOW_SHARE
+} from './config'
 import { isTrue, objectSnapshot } from './lib/base'
 import { postMessageToParent } from './lib/iframe'
 import { messages } from './lib/messages'
@@ -97,7 +108,7 @@ export const state = reactive({
   status: [],
 
   bandwidth: false,
-  fill: true,
+  fill: false,
 
   backgroundMode: '',
   backgroundImageURL: null,
@@ -106,6 +117,7 @@ export const state = reactive({
 
   muteVideo: !isTrue(urlParams.get('video') ?? !MUTE_VIDEO, true),
   muteAudio: !isTrue(urlParams.get('audio') ?? !MUTE_AUDIO, true),
+  muteScreen: !isTrue(urlParams.get('screen') ?? !MUTE_SCREEN, true),
 
   deviceVideo: null,
   deviceAudio: null,
@@ -155,6 +167,8 @@ function updateStream() {
       state.stream
         ?.getAudioTracks()
         .forEach(t => (t.enabled = !state?.muteAudio))
+
+      // state.stream.getTrackById(0).enabled = !state?.muteScreen
     }
   }
   catch (err) {

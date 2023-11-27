@@ -96,6 +96,8 @@ export const SHOW_CHAT = isTrue(getConfig('SHOW_CHAT'), true)
 export const MUTE_AUDIO = isTrue(getConfig('MUTE_AUDIO'), false)
 export const MUTE_VIDEO = isTrue(getConfig('MUTE_VIDEO'), false)
 
+export const MUTE_SCREEN = isTrue(getConfig('MUTE_SCREEN'), false)
+
 export const DEFAULT_ROOM = getConfig('DEFAULT_ROOM')
 
 export const LICENSE = getConfig('LICENSE', '')

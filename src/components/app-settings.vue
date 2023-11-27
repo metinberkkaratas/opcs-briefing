@@ -168,18 +168,10 @@ export default {
     <!-- <pre>{{ state }}</pre> -->
     <div class="release-info">
       <a href="#" @click.prevent="showInfo = !showInfo">Server Info</a>
-      |
-      <a
-        href="https://github.com/holtwick/briefing"
-        target="_blank"
-        rel="noopener"
-        title="Open Github source code repository"
-      >{{ release }}</a>
     </div>
     <div v-if="showInfo">
       <div class="form-group settings-group">
         <label class="form-labelx"><b>Signal Server</b></label>
-        <div>{{ signalStatus }} {{ SIGNAL_SERVER_URL }}</div>
         <div>
           <a href="#" @click.prevent="doCheckSignal">Check Connectivity</a>
         </div>

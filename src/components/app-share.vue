@@ -68,6 +68,5 @@ function doToggleFullScreen(element: any) {
     </div>
     <p>{{ $t('share.qr_info') }}</p>
     <div ref="qrCodeElement" class="qrcode" @click="toggle" v-html="qrCodeSvg" />
-    <a v-html="$t('share.feedback', { link })" />
   </div>
 </template>

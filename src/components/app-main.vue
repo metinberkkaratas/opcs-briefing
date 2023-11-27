@@ -1,4 +1,5 @@
 <script lang="ts">
+import { useRoute } from 'vue-router'
 import { setAllowedBugTracking } from '../bugs'
 import { ROOM_PATH } from '../config'
 import { historyAddRoom } from '../lib/history'
@@ -80,6 +81,10 @@ export default {
       state.muteVideo = !state.muteVideo
       messages.emit('updateStream')
     },
+    doScreen() {
+      state.muteScreen = !state.muteScreen
+      messages.emit('updateStream')
+    },
     doAudio() {
       state.muteAudio = !state.muteAudio
       messages.emit('updateStream')
@@ -145,6 +150,8 @@ export default {
     },
     setName() {
       const name = localStorage.getItem('name')
+//      const route = useRoute()
+//      const name = route?.query?.name
       if (name) {
         this.name = name
         messages.emit('userInfo', {
@@ -301,21 +308,35 @@ export default {
               <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
             </svg>
           </button>
-          <button class="tool tool-close" @click="doQuit">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18" />
-              <line x1="6" y1="6" x2="18" y2="18" />
+          <button
+            class="tool"
+            :class="{ '-off': state.muteScreen }"
+            @click="doScreen">
+            <svg v-if="state.muteScreen"
+                 viewBox="0 0 28 28" version="1.1"
+                 xmlns="http://www.w3.org/2000/svg"
+                 xmlns:xlink="http://www.w3.org/1999/xlink">
+              <title>ic_fluent_share_screen_28_regular</title>
+              <desc>Created with Sketch.</desc>
+              <g id="🔍-System-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="ic_fluent_share_screen_28_regular" fill="#212121" fill-rule="nonzero">
+                  <path d="M23.75,4.99939 C24.9926,4.99939 26,6.00675 26,7.24939 L26,20.75 C26,21.9926 24.9926,23 23.75,23 L4.25,23 C3.00736,23 2,21.9927 2,20.75 L2,7.24939 C2,6.00675 3.00736,4.99939 4.25,4.99939 L23.75,4.99939 Z M23.75,6.49939 L4.25,6.49939 C3.83579,6.49939 3.5,6.83518 3.5,7.24939 L3.5,20.75 C3.5,21.1642 3.83579,21.5 4.25,21.5 L23.75,21.5 C24.1642,21.5 24.5,21.1642 24.5,20.75 L24.5,7.24939 C24.5,6.83518 24.1642,6.49939 23.75,6.49939 Z M13.9975,8.62102995 C14.1965,8.62102995 14.3874,8.69998 14.5281,8.8407 L17.7826,12.0952 C18.0755,12.3881 18.0755,12.863 17.7826,13.1559 C17.4897,13.4488 17.0148,13.4488 16.7219,13.1559 L14.7477,11.1817 L14.7477,18.6284 C14.7477,19.0426 14.412,19.3784 13.9977,19.3784 C13.5835,19.3784 13.2477,19.0426 13.2477,18.6284 L13.2477,11.1835 L11.2784,13.1555 C10.9858,13.4486 10.5109,13.4489 10.2178,13.1562 C9.92469,12.8636 9.92436,12.3887 10.217,12.0956 L13.467,8.84107 C13.6077,8.70025 13.7985,8.62102995 13.9975,8.62102995 Z" id="🎨-Color">
+                  </path>
+                </g>
+              </g>
             </svg>
-            <!--          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M10.68 13.31a16 16 0 0 0 3.41 2.6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7 2 2 0 0 1 1.72 2v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.42 19.42 0 0 1-3.33-2.67m-2.67-3.34a19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91"></path><line x1="23" y1="1" x2="1" y2="23"></line></svg> -->
+            <svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28">
+              <title>share-screen-svgrepo-com-svg</title>
+              <defs>
+                <image  width="28" height="28" id="img1" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAMAAABF0y+mAAAAAXNSR0IB2cksfwAAAIRQTFRFAAAAw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDw8PDFIIbFQAAACx0Uk5TACjA/v/CJNPkgn/og0A+U/j2SkT7Nlz82dTd9e7mH73t514jJsG/vry6NzOfQZ6VAAAAi0lEQVR4nGNgGHyAkYmZBQMws7KBJdk5OLkwACc3O1iSmQebeTzMYIqFCy7CywdncrGgSfILCArhkhQWYWERFMUuKSYuIckuJS2EVVJGVo5Jnk1BEaukkjIDkzyDihIOBzGoquF2LX5JoLF4JNXxSGpo4pHU0saQxB7wEEm8UabCii2ymdiwmTfAAACMLwiH/VuSogAAAABJRU5ErkJggg=="/>
+              </defs>
+              <g id="🔍-System-Icons">
+                <g id="ic_fluent_share_screen_28_regular">
+                  <path id="🎨-Color" fill-rule="evenodd" class="s0" d="m23.8 5c1.2 0 2.2 1 2.2 2.2v13.6c0 1.2-1 2.2-2.3 2.2h-19.5c-1.2 0-2.2-1-2.2-2.3v-13.5c0-1.2 1-2.2 2.2-2.2zm0 1.5h-19.5c-0.4 0-0.7 0.3-0.7 0.7v13.6c0 0.4 0.3 0.7 0.7 0.7h19.5c0.5 0 0.8-0.3 0.8-0.7v-13.6c0-0.4-0.3-0.7-0.8-0.7zm-9.7 2.1q0.3 0 0.5 0.2l3.3 3.3c0.3 0.3 0.3 0.8 0 1.1-0.3 0.2-0.8 0.2-1.1 0l-2-2v7.4c0 0.4-0.3 0.8-0.7 0.8-0.4 0-0.8-0.4-0.8-0.8v-7.4l-1.9 2c-0.3 0.2-0.8 0.2-1.1 0-0.3-0.3-0.3-0.8 0-1.1l3.3-3.3q0.2-0.2 0.5-0.2z"/>
+                  <use id="Katman 1" href="#img1" x="0" y="0"/>
+                </g>
+              </g>
+            </svg>
           </button>
           <button
             class="tool"

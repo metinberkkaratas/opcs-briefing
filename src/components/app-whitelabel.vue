@@ -128,15 +128,6 @@ export default {
         </div>
       </div>
       <div class="footer links">
-        <p v-if="LICENSE">
-          {{ LICENSE }}
-        </p>
-        <p v-else>
-          FOR WHITELABEL USE WE ASK YOU TO PURCHASE A
-          <a href="https://github.com/holtwick/briefing/#commercial-license">
-            COMMERCIAL LICENSE
-          </a>
-        </p>
       </div>
     </div>
   </div>

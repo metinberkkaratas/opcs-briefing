@@ -22,6 +22,7 @@ export default defineConfig({
   envPrefix: ['BRIEFING_', 'APP_', 'VITE_'],
   plugins: [vue()],
   define,
+  base: '/voip/',
   build: {
     outDir: 'www',
     sourcemap: true,
